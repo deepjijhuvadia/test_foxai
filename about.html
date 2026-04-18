@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — FoxAI</title>
+    <meta name="description" content="Meet the team behind FoxAI. Built by creators obsessed with intelligent tools at the intersection of AI engineering and creator culture.">
+    <meta property="og:title" content="About — FoxAI">
+    <meta property="og:description" content="Built by creators obsessed with intelligent tools.">
+    <link rel="canonical" href="https://foxai.app/about">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <style>
+        /* ─── ABOUT PAGE SPECIFIC ─── */
+        .about-hero {
+            padding-top: 160px;
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            margin-bottom: 20px;
+            font-size: clamp(40px, 6vw, 80px);
+        }
+
+        .about-hero p {
+            max-width: 580px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            text-align: center;
+            padding: 120px 60px;
+        }
+
+        .mission-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .mission-card {
+            background: var(--glass);
+            border: 1px solid var(--smoke-border);
+            border-radius: 24px;
+            padding: 40px 28px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mission-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .mission-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 26px;
+        }
+
+        .mission-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .mission-card p {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 120px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-section h2 {
+            margin-bottom: 32px;
+        }
+
+        .story-section p {
+            font-size: 17px;
+            line-height: 1.9;
+            margin-bottom: 24px;
+        }
+
+        .story-quote {
+            margin: 48px 0;
+            padding: 40px;
+            background: var(--glass);
+            border: 1px solid var(--smoke-border);
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .story-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 28px;
+            font-size: 80px;
+            color: rgba(255, 255, 255, 0.06);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .story-quote p {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--ivory);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Founders */
+        .founders-about {
+            padding: 120px 60px;
+            text-align: center;
+        }
+
+        .founders-about h2 {
+            margin-bottom: 20px;
+        }
+
+        .founders-about > p {
+            margin-bottom: 60px;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 120px 60px;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .value-item {
+            background: var(--glass);
+            border: 1px solid var(--smoke-border);
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: left;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .value-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .value-item h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .value-item p {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 1024px) {
+            .mission-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            .values-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .about-hero,
+            .mission-section,
+            .story-section,
+            .founders-about,
+            .values-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-logo">FoxAI</div>
+        <div class="loading-tagline">Edit Nothing. Create Everything.</div>
+        <div class="loading-bar">
+            <div class="loading-bar-inner"></div>
+        </div>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="bg-gradient">
+        <div class="bg-orb orb1"></div>
+        <div class="bg-orb orb2"></div>
+        <div class="bg-orb orb3"></div>
+    </div>
+
+    <div class="particles-container" id="particles"></div>
+    <canvas id="three-canvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">FoxAI<span>.app</span></a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="waitlist.html">Waitlist</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="waitlist.html" class="nav-cta">Join Waitlist</a>
+    </nav>
+
+    <main>
+
+        <!-- ABOUT HERO -->
+        <section class="about-hero">
+            <div class="section-label reveal">About FoxAI</div>
+            <h1 class="reveal">Built by creators<br>obsessed with<br>intelligent tools.</h1>
+            <p class="reveal">A team at the intersection of AI engineering and creator culture — building the future of content creation.</p>
+        </section>
+
+        <div class="section-divider"><hr></div>
+
+        <!-- MISSION -->
+        <section class="mission-section">
+            <div class="section-label reveal">Our Mission</div>
+            <h2 class="reveal">Eliminate editing friction.<br>Amplify creative output.</h2>
+            <div class="mission-cards">
+                <div class="mission-card reveal">
+                    <div class="mission-icon">🧠</div>
+                    <h3>AI-First Approach</h3>
+                    <p>Every feature is powered by purpose-built AI models that understand content, context, and creator intent.</p>
+                </div>
+                <div class="mission-card reveal">
+                    <div class="mission-icon">⚡</div>
+                    <h3>Speed as Standard</h3>
+                    <p>What takes hours in traditional editors takes seconds with FoxAI. Time is the creator's most valuable resource.</p>
+                </div>
+                <div class="mission-card reveal">
+                    <div class="mission-icon">🎯</div>
+                    <h3>Creator Obsessed</h3>
+                    <p>Built for the people who create, not for enterprise workflows. Every decision serves the individual creator.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><hr></div>
+
+        <!-- STORY -->
+        <section class="story-section">
+            <div class="section-label reveal">Our Story</div>
+            <h2 class="reveal">From frustration<br>to revolution.</h2>
+            <p class="reveal">We started FoxAI because we lived the problem. Hours spent cutting clips, adjusting timelines, syncing audio — all for a 30-second reel. There had to be a better way.</p>
+            <div class="story-quote reveal">
+                <p>The best editing software is the one you never have to open.</p>
+            </div>
+            <p class="reveal">We believe AI should do the heavy lifting so creators can focus on what matters: ideas, storytelling, and connecting with their audience.</p>
+        </section>
+
+        <div class="section-divider"><hr></div>
+
+        <!-- FOUNDERS -->
+        <section class="founders-about">
+            <div class="section-label reveal">Team</div>
+            <h2 class="reveal">The people behind<br>the product.</h2>
+            <p class="reveal" style="max-width:480px;margin:0 auto 60px;">Small team. Big ambitions. Relentless execution.</p>
+            <div class="founders-grid">
+                <div class="founder-card reveal" data-tilt>
+                    <div class="founder-avatar">D</div>
+                    <h3>Darshan Jijhuvadia</h3>
+                    <div class="founder-role">AI Engineer / Co-Founder</div>
+                    <p>Building AI systems, creator tools, and next-gen automation products. Background in machine learning and startup execution.</p>
+                </div>
+                <div class="founder-card reveal" data-tilt>
+                    <div class="founder-avatar">U</div>
+                    <h3>Utkarsh Singh</h3>
+                    <div class="founder-role">Founder</div>
+                    <p>Driving creator growth systems, partnerships, scaling strategy, and business expansion across platforms.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><hr></div>
+
+        <!-- VALUES -->
+        <section class="values-section">
+            <div class="section-label reveal">Our Values</div>
+            <h2 class="reveal">What drives us.</h2>
+            <div class="values-grid">
+                <div class="value-item reveal">
+                    <h3>🚀 Ship Fast, Iterate Faster</h3>
+                    <p>Speed beats perfection. We launch, learn, and improve relentlessly.</p>
+                </div>
+                <div class="value-item reveal">
+                    <h3>💎 Quality is Non-Negotiable</h3>
+                    <p>Every pixel, every interaction, every output — it has to feel premium.</p>
+                </div>
+                <div class="value-item reveal">
+                    <h3>🎨 Creators Come First</h3>
+                    <p>Every product decision starts with "how does this help the creator?"</p>
+                </div>
+                <div class="value-item reveal">
+                    <h3>🔮 Think 10x, Not 10%</h3>
+                    <p>We don't improve editing — we reimagine it from scratch with AI.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><hr></div>
+
+        <!-- CTA -->
+        <section class="waitlist-section" id="about-cta">
+            <div class="section-label reveal">Join the Movement</div>
+            <h2 class="reveal">Be part of the<br>creator revolution.</h2>
+            <p class="reveal">Get early access to FoxAI and shape the future of content creation.</p>
+            <form class="waitlist-form reveal" data-waitlist-inline>
+                <input type="email" class="waitlist-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn-primary">Join Waitlist</button>
+                <div class="form-message"></div>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">FoxAI<span style="opacity:0.35;font-weight:400">.app</span></div>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="waitlist.html">Waitlist</a>
+            <a href="contact.html">Contact</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+        <div class="footer-copy">© 2025 FoxAI. All rights reserved.</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/three-effects.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/waitlist.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

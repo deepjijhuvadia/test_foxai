@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Waitlist — FoxAI</title>
+    <meta name="description" content="Join the FoxAI waitlist and get early access to the AI-powered video editor that creates finished content in seconds.">
+    <meta property="og:title" content="Join Waitlist — FoxAI">
+    <meta property="og:description" content="Get early access to FoxAI. The future of content creation.">
+    <link rel="canonical" href="https://foxai.app/waitlist">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <style>
+        /* ─── WAITLIST PAGE SPECIFIC ─── */
+        .waitlist-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 60px 100px;
+        }
+
+        .waitlist-container {
+            width: 100%;
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .waitlist-container h1 {
+            font-size: clamp(36px, 5vw, 64px);
+            margin-bottom: 16px;
+        }
+
+        .waitlist-container > p {
+            margin-bottom: 48px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* Form Card */
+        .waitlist-card {
+            background: var(--glass);
+            border: 1px solid var(--smoke-border);
+            border-radius: 28px;
+            padding: 48px 40px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waitlist-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        }
+
+        .waitlist-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(150, 170, 255, 0.03), transparent 50%);
+            pointer-events: none;
+        }
+
+        .waitlist-card .form-group {
+            position: relative;
+            z-index: 1;
+        }
+
+        .waitlist-card .btn-primary {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .optional-tag {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 400;
+            margin-left: 6px;
+        }
+
+        /* Counter */
+        .waitlist-counter {
+            margin-top: 32px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .counter-number {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--ivory);
+            margin-bottom: 4px;
+        }
+
+        .counter-label {
+            font-size: 12px;
+            color: var(--mid-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .avatar-stack {
+            display: flex;
+        }
+
+        .avatar-stack .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--black);
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .avatar-stack .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-stack .avatar:nth-child(1) { background: linear-gradient(135deg, rgba(150, 170, 255, 0.3), rgba(150, 170, 255, 0.1)); }
+        .avatar-stack .avatar:nth-child(2) { background: linear-gradient(135deg, rgba(200, 130, 255, 0.3), rgba(200, 130, 255, 0.1)); }
+        .avatar-stack .avatar:nth-child(3) { background: linear-gradient(135deg, rgba(255, 200, 100, 0.3), rgba(255, 200, 100, 0.1)); }
+        .avatar-stack .avatar:nth-child(4) { background: linear-gradient(135deg, rgba(100, 255, 180, 0.3), rgba(100, 255, 180, 0.1)); }
+
+        .social-proof-text {
+            font-size: 13px;
+            color: var(--mid-gray);
+        }
+
+        .social-proof-text strong {
+            color: var(--light-gray);
+        }
+
+        /* Benefits */
+        .waitlist-benefits {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--glass);
+            border: 1px solid var(--smoke-border);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .benefit-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .benefit-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .benefit-item p {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+            .waitlist-page {
+                padding: 120px 20px 60px;
+            }
+
+            .waitlist-card {
+                padding: 36px 24px;
+            }
+
+            .waitlist-benefits {
+                grid-template-columns: 1fr;
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-logo">FoxAI</div>
+        <div class="loading-tagline">Edit Nothing. Create Everything.</div>
+        <div class="loading-bar">
+            <div class="loading-bar-inner"></div>
+        </div>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="bg-gradient">
+        <div class="bg-orb orb1"></div>
+        <div class="bg-orb orb2"></div>
+        <div class="bg-orb orb3"></div>
+    </div>
+
+    <div class="particles-container" id="particles"></div>
+    <canvas id="three-canvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">FoxAI<span>.app</span></a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="waitlist.html" class="active">Waitlist</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="waitlist.html" class="nav-cta">Join Waitlist</a>
+    </nav>
+
+    <main>
+
+        <section class="waitlist-page">
+            <div class="waitlist-container">
+                <div class="section-label reveal">Early Access</div>
+                <h1 class="reveal">Get in before<br>everyone else.</h1>
+                <p class="reveal">FoxAI is currently in private beta. Join the waitlist to secure your spot and get early access when we launch.</p>
+
+                <!-- Waitlist Form Card -->
+                <div class="waitlist-card reveal">
+                    <form id="waitlist-full-form">
+                        <div class="form-group">
+                            <label class="form-label" for="wl-name">Full Name</label>
+                            <input type="text" class="form-input" id="wl-name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="wl-email">Email Address</label>
+                            <input type="email" class="form-input" id="wl-email" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="wl-instagram">Instagram Handle <span class="optional-tag">Optional</span></label>
+                            <input type="text" class="form-input" id="wl-instagram" placeholder="@yourhandle">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="wl-creator-type">Creator Type</label>
+                            <select class="form-select" id="wl-creator-type">
+                                <option value="" disabled selected>Select your creator type</option>
+                                <option value="Content Creator">Content Creator</option>
+                                <option value="YouTuber">YouTuber</option>
+                                <option value="Instagram Creator">Instagram Creator</option>
+                                <option value="TikTok Creator">TikTok Creator</option>
+                                <option value="Podcaster">Podcaster</option>
+                                <option value="Agency">Agency</option>
+                                <option value="Brand">Brand</option>
+                                <option value="Filmmaker">Filmmaker</option>
+                                <option value="Freelance Editor">Freelance Editor</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Join Waitlist</button>
+                        <div class="form-message"></div>
+
+                        <!-- Counter -->
+                        <div class="waitlist-counter">
+                            <div class="counter-number" data-counter="2847">0</div>
+                            <div class="counter-label">creators already waiting</div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Social Proof -->
+                <div class="social-proof reveal">
+                    <div class="avatar-stack">
+                        <div class="avatar">A</div>
+                        <div class="avatar">K</div>
+                        <div class="avatar">R</div>
+                        <div class="avatar">M</div>
+                    </div>
+                    <div class="social-proof-text">
+                        <strong>2,847 creators</strong> have already joined
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="waitlist-benefits">
+                    <div class="benefit-item reveal">
+                        <div class="benefit-icon">🎟️</div>
+                        <h3>Priority Access</h3>
+                        <p>Be first to test new features</p>
+                    </div>
+                    <div class="benefit-item reveal">
+                        <div class="benefit-icon">🎁</div>
+                        <h3>Launch Perks</h3>
+                        <p>Exclusive discounts at launch</p>
+                    </div>
+                    <div class="benefit-item reveal">
+                        <div class="benefit-icon">💬</div>
+                        <h3>Shape the Product</h3>
+                        <p>Direct input on features</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">FoxAI<span style="opacity:0.35;font-weight:400">.app</span></div>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="waitlist.html">Waitlist</a>
+            <a href="contact.html">Contact</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+        <div class="footer-copy">© 2025 FoxAI. All rights reserved.</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/three-effects.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/waitlist.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
