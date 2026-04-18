@@ -96,10 +96,17 @@
 
     // ─── ACTIVE NAV LINK HIGHLIGHT ───
     function initActiveNavLink() {
-        var path = window.location.pathname.split('/').pop() || 'index.html';
+        var path = window.location.pathname;
+        if (path.endsWith('/')) {
+            path = path.slice(0, -1);
+        }
+        if (path === '') {
+            path = '/';
+        }
+        
         document.querySelectorAll('.nav-links a').forEach(function (link) {
             var href = link.getAttribute('href');
-            if (href === path || (path === '' && href === 'index.html')) {
+            if (href === path || (path === '/' && href === '/index.html')) {
                 link.classList.add('active');
             }
         });
